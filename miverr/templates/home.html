@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <p>Home Page</p>
+  <a href="{% url 'miverrapp:gig_detail' 45 %}">gig_detail</a>
+
+{% if user.is_authenticated %}
+  <p>Hi {{ user.username }}
+  <p><a href="{% url 'account_logout' %}">Log out</a></p>
+{% else %}
+  <p><a <h></h>ref="{% url 'signup' %}">Sign Up</a></p>
+  <p><a href="{% url 'login' %}">Log In </a></p>
+{% endif %}
+
+{% endblock %}
