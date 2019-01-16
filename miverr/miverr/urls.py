@@ -23,6 +23,7 @@ urlpatterns = [
     re_path(r'^admin/', admin.site.urls),
     path('',include('miverrapp.urls',namespace='miverrapp')),
     path('users/', include('users.urls')),
+    path('users/', include('django.contrib.auth.urls')),
     path('accounts/', include('allauth.urls')),
 ]
 

@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
-
+{% load socialaccount %}
 {% block body %}
   <p>Home Page</p>
   <a href="{% url 'miverrapp:gig_detail' 45 %}">gig_detail</a>
+  <h1>MIverr</h1>
 
-{% if user.is_authenticated %}
-  <p>Hi {{ user.username }}
-  <p><a href="{% url 'account_logout' %}">Log out</a></p>
-{% else %}
-  <p><a <h></h>ref="{% url 'signup' %}">Sign Up</a></p>
+  {% if user.is_authenticated %}
+  <p>Welcome {{ user.username }} !!!</p>
+  <p><a href="{% url 'logout' %}">Log out</a>
+  {% else %}
+  <p><a href="{% url 'signup' %}">Sign Up</a></p>
   <p><a href="{% url 'login' %}">Log In </a></p>
-{% endif %}
-
+  <p><a href="{% provider_login_url 'google' %}">Log In with Gmail</a></p>
+  {% endif %}
 {% endblock %}
