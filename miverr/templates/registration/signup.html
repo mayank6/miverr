@@ -1,4 +1,5 @@
 {% load static %}
+{% load widget_tweaks %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -29,48 +30,39 @@
   <body class="text-center bg-dark">
 <div class="container mt" >
 
-    <form class="form-signin ft" method="post">
+<form class="form-signin ft" method="post">
   <img class="mb-4" src="{% static 'img/logo.png' %}" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
-  <label for="inputEmail" class="sr-only">First Name</label>
-  <input type="email" id="inputEmail" class="form-control" placeholder="First Name" required autofocus>
-  <div class="checkbox mb-3">
 
-  </div>
-  <label for="inputEmail" class="sr-only">Last Name</label>
-  <input type="email" id="inputEmail" class="form-control" placeholder="Last Name" required autofocus>
-  <div class="checkbox mb-3">
+<form method="post" class="ft">
+  {% csrf_token %}
 
-  </div>
-  <label for="inputEmail" class="sr-only">UserName</label>
-  <input type="email" id="inputEmail" class="form-control" placeholder="UserName" required autofocus>
-  <div class="checkbox mb-3">
+  {% for hidden_field in form.hidden_fields %}
+    {{ hidden_field }}
+  {% endfor %}
 
-  </div>
-  <label for="inputEmail" class="sr-only">Email address</label>
-  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-  <div class="checkbox mb-3">
+  {% if form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">
+      {% for error in form.non_field_errors %}
+        {{ error }}
+      {% endfor %}
+    </div>
+  {% endif %}
 
-  </div>
-  <label for="inputPassword" class="sr-only">Password</label>
-  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-  <div class="checkbox mb-3">
+  {% for field in form.visible_fields %}
+    <div class="form-group">
+      {% render_field field class="form-control" placeholder=field.label %}
+        {% if field.errors %}
+          {% for error in field.errors %}
+            <div class="feedback">
+              <p style=color:red;>{{ error }}</p>
+            </div>
+          {% endfor %}
+      {% endif %}
+    </div>
+  {% endfor %}
 
-  </div>
-  <label for="inputEmail" class="sr-only">Re-enter Password</label>
-  <input type="email" id="inputEmail" class="form-control" placeholder="Re-enter Password" required autofocus>
-  <div class="checkbox mb-3">
-
-  </div>
   <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
-  <div class="checkbox mb-3">
-  </div>
-</form>
-
-<form class="" action="index.html" method="post">
-{{form.as_p}}  
-</form>
-
 </div>
 
 

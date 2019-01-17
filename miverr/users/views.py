@@ -8,7 +8,6 @@ class SignUp(generic.CreateView):
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
 
-
 def logout_view(request):
     logout(request)
     return redirect('/')
