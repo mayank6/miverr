@@ -1,16 +1,27 @@
 {% extends 'base.html' %}
 {% load socialaccount %}
+{% load static %}
 {% block body %}
-  <p>Home Page</p>
-  <a href="{% url 'miverrapp:gig_detail' 45 %}">gig_detail</a>
-  <h1>MIverr</h1>
+<div class="mr-2 ml-2">
+  <img src="{% static 'img/home.jpg' %}" class="img-fluid mr-2 ml-2" style="height:250px; width:100%;" alt="">
 
-  {% if user.is_authenticated %}
-  <p>Welcome {{ user.username }} !!!</p>
-  <p><a href="{% url 'logout' %}">Log out</a>
-  {% else %}
-  <p><a href="{% url 'signup' %}">Sign Up</a></p>
-  <p><a href="{% url 'login' %}">Log In </a></p>
-  <p><a href="{% provider_login_url 'google' %}">Log In with Gmail</a></p>
-  {% endif %}
+</div>
+<div class="row ml-1 mr-1 mt-3">
+
+{% for i in '123456789101112'%}
+<div class="col-md-3">
+           <div class="card mb-4 box-shadow">
+             <img class="card-img-top" src="{% static 'img/home.jpg' %}" alt="Card image cap">
+             <div class="card-body">
+               <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+               <div class="d-flex justify-content-between align-items-center">
+                 <b>by username</b>
+                 <small class="text-muted"><p style="color:green;""><b>$5</b></p></small>
+               </div>
+             </div>
+           </div>
+         </div>
+{% endfor %}
+
+    </div>
 {% endblock %}

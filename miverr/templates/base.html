@@ -15,18 +15,21 @@
       overflow-x: hidden;
     }
       .img1{
-        height:40px;
-        width:40px;}
+        height:30px;
+        width:30px;}
       .bg-light{
         background-color: #ffb3b3!important;
       }
       .footer {
-  position: absolute;
+  position: relative;
   right: 0;
   bottom: 0;
   left: 0;
   background-color: #efefef;
   text-align: center;
+}
+.navsticky{
+  position: fixed;
 }
     </style>
   </head>
@@ -35,7 +38,7 @@
     <header class="blog-header py-3 bg-light">
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1 ml-2" >
-            <a class="text-muted" href="#"><b>MIVERR</b></a>
+            <b>MIVERR</b>
           </div>
           <div class="col-4 text-center">
             <img src="{% static 'img/logo.png' %}" class="fluid img1"  alt="">
@@ -62,14 +65,14 @@
         </div>
       </header>
 
-    <div class="nav-scroller py-1 mb-2">
+    <div class="nav-scroller py-1 mb-2 ">
         <nav class="nav d-flex justify-content-between">
-          <a class="p-2 text-muted" href="#">World</a>
-          <a class="p-2 text-muted" href="#">U.S.</a>
-          <a class="p-2 text-muted" href="#">Technology</a>
-          <a class="p-2 text-muted" href="#">Design</a>
-          <a class="p-2 text-muted" href="#">Culture</a>
-          <a class="p-2 text-muted" href="#">Business</a>
+          <a class="p-2 text-muted" href="#">Graphics Design</a>
+          <a class="p-2 text-muted" href="#">Digital Marketing</a>
+          <a class="p-2 text-muted" href="#">Content Writing</a>
+          <a class="p-2 text-muted" href="#">Game</a>
+          <a class="p-2 text-muted" href="#">Animation</a>
+          <a class="p-2 text-muted" href="#">Music and video</a>
           <a class="p-2 text-muted" href="#">Politics</a>
           <a class="p-2 text-muted" href="#">Opinion</a>
           <a class="p-2 text-muted" href="#">Science</a>
@@ -82,23 +85,18 @@
     {% block body %}
     {% endblock %}
 <div class='footer'>
-<footer class="page-footer font-small bg-dark pt-4 sticky">
+<footer class="page-footer font-small bg-dark pt-4">
 
-    <!-- Footer Elements -->
+
     <div class="container">
 
-      <!--Grid row-->
+
       <div class="row">
 
-        <!--Grid column-->
+
         <div class="col-md-6 mb-4">
 
-          <!-- Form -->
-
         </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
         <div class="col-md-6 mb-4">
 
           <form class="input-group">
@@ -115,8 +113,8 @@
       <!--Grid row-->
 
     </div>
-    <div class="footer-copyright text-center py-3">© 2018 Copyright:
-      <a href="">MIVERR</a>
+    <div class="footer-copyright text-center py-3"><p style=color:white;>© 2018 Copyright:
+      <a href="">MIVERR</a></p>
     </div>
   </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

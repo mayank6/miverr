@@ -1,5 +1,68 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block body %}
-  <p>This is gig detail</p>
+<div class="row">
+  <div class="col-md-8">
+    <div class="card card-default mt-1 ">
+      <div class="card-body">I will create a landing page in php fully deployed on heroku app</div><hr>
+      <div class="card-body"><img src="{% static 'img/home.jpg' %}" class="img-responsive card-img" alt=""></div>
+    </div>
+  <div class="card card-default mt-3 mb-3">
+    <div class="card-header">About this gig </div>
+    <div class="card-body"><p class="card-text">I will create a landing page in php fully deployed on heroku app  </p></div>
+</div>
+
+
+<div class="card card-default mt-3 mb-3">
+<div class="card-header">
+  Review
+</div>
+<ul class="list-group-item list-group-flush">
+<div class="row">
+  <div class="col-md-1">
+    <img src="{% static 'img/logo.png' %}" style="height:50px; width:50px;" class="img-circle card-img center-block" alt="">
+  </div>
+  <div class="col-md-11">
+    <h5>username</h5>
+    <p>Great Job</p>
+  </div>
+  <div class="col-md-1">
+    <img src="{% static 'img/logo.png' %}" style="height:50px; width:50px;" class="img-circle card-img center-block" alt="">
+  </div>
+  <div class="col-md-11">
+    <h5>username</h5>
+    <p>Will work with him in future</p>
+  </div>
+  <div class="col-md-1">
+    <img src="{% static 'img/logo.png' %}" style="height:50px; width:50px;" class="img-circle card-img center-block" alt="">
+  </div>
+  <div class="col-md-11">
+    <h5>username</h5>
+    <p>This guy have some knwoledge</p>
+  </div>
+
+</div>
+
+</ul>
+</div>
+
+  </div>
+<div class="col-md-4 mt-2">
+  <div class="card-header">
+    <a href="#" class="btn btn-lg btn-success btn-block">Order Now($6)</a>
+</div>
+    <div class="card text-center mt-4">
+        <div class="card-header">
+          Profile
+        </div>
+        <div class="card-body mt-2">
+          <img src="{% static 'img/logo.png' %}" style="height:60px; width:60px;" class="center-block img-circle" alt="">
+          <h5 class="card-title">Username</h5>
+          <p class="card-text">bio of user</p>
+          <a href="#" class="btn btn-primary">Visit</a>
+        </div>
+</div>
+
+</div>
+</div>
 {% endblock %}
