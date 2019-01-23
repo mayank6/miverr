@@ -13,7 +13,7 @@
 <div class="container mt-2 mb-2">
 
 <form method="post" class="ft" enctype="multipart/form-data">
-  <h3 class="card-header">Create a new GIG</h3>
+  <h3 class="card-header">Edit GIG</h3>
   {% csrf_token %}
 
   {% for hidden_field in form.hidden_fields %}
@@ -45,6 +45,6 @@
     </div>
   {% endfor %}
 
-  <button class="btn btn-lg btn-primary btn-block" type="submit">CREATE</button></form>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">SUBMIT</button></form>
 </div>
 {% endblock %}

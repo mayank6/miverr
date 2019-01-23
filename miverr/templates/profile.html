@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+
+
+{% block body %}
+<div class="container card card-default">
+<div class="row card-header">
+  <div class="" style="margin-left:100px; margin-right:100px;">
+    <img src="{% static 'img/logo.png' %}" style="height:80px; width:80px;" class="card-head center-block img-circle" alt="">
+  </div>
+  <div class="col-md-8">
+    <h4>{{profile.username}}</h4>
+    <p>{{profile.slogan}}{% if profile == request.user %}<a href="#" id="editslogan">edit</a></p>
+    <form class="form-horizontal" id="productionForm1" method="POST" style="display:none;">
+      {% csrf_token %}
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Slogan:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="email" name="slogan" placeholder="{{profile.slogan}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-default">Update</button>
+        </div>
+      </div>
+</form>
+    {% endif %}
+  </div>
+
+</div>
+<div class="container">
+  <div class="card-body">
+    <h4 class="text-uppercase">About {{profile.username}}</h4>
+    <p>{{profile.about}}{% if profile == request.user %}<a href="#" id="editabout">edit</a></p>
+      <form class="form-horizontal" id="productionForm2" method="POST" style="display:none;">
+        {% csrf_token %}
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="email">About:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="email" name="about" placeholder="{{profile.about}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Update</button>
+          </div>
+        </div>
+</form>
+      {% endif %}
+  </div>
+
+</div>
+<hr>
+<h2 class="text-uppercase">{{profile.username}}'s Gigs</h2>
+<hr>
+<div class="row card-body">
+
+  {% for obj in objects %}
+  <div class="col-md-2">
+             <div class="card mb-4 box-shadow">
+            <a href="{% url 'miverrapp:gig_detail' obj.id %}"><img class="card-img-top" src="/media/{{obj.photo}}" alt="Card image cap"></a>
+               <div class="card-body">
+                 <p class="card-text">{{ obj.title }}</p>
+                 <div class="d-flex justify-content-between align-items-center">
+                   <b>{{obj.user}}</b>
+                   <small class="text-muted"><p style="color:green;""><b>${{obj.price}}</b></p></small>
+                 </div>
+               </div>
+             </div>
+           </div>
+  {% endfor %}
+
+</div>
+
+
+
+</div>
+{% endblock %}
+
+{% block script %}
+    $(document).ready(function(){
+        $("#editslogan").click(function(e) {
+            $("#productionForm1").toggle();
+            e.preventDefault();
+        });
+    });
+    $(document).ready(function(){
+        $("#editabout").click(function(e) {
+            $("#productionForm2").toggle();
+            e.preventDefault();
+        });
+    });
+{% endblock %}

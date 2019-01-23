@@ -15,7 +15,7 @@
              <div class="card-body">
                <p class="card-text">{{ obj.title }}</p>
                <div class="d-flex justify-content-between align-items-center">
-                 <b>by {{obj.user}}</b>
+                 <b>by <a href="{% url 'miverrapp:profile' obj.user.username %}">{{obj.user}}</a></b>
                  <small class="text-muted"><p style="color:green;""><b>${{obj.price}}</b></p></small>
                </div>
              </div>

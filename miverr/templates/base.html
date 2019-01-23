@@ -43,7 +43,7 @@
             <b>MIVERR</b>
           </div>
           <div class="col-4 text-center">
-            <img src="{% static 'img/logo.png' %}" class="fluid img1"  alt="">
+            <a href="{% url 'miverrapp:home' %}"><img src="{% static 'img/logo.png' %}" class="fluid img1"  alt=""></a>
           </div>
           <div class="col-4 d-flex justify-content-center align-items-center mr-0">
           {% if user.is_authenticated %}
@@ -54,7 +54,7 @@
                 {{user.username}}
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Account</a>
+                <a class="dropdown-item" href="{% url 'miverrapp:profile' user.username %}">Profile</a>
                 <a class="dropdown-item" href="{% url 'miverrapp:create_gig' %}">Create GIG</a>
                 <a class="dropdown-item" href="{% url 'miverrapp:my_gigs' %}">My gigs</a>
                 <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
@@ -114,8 +114,13 @@
       <a href="">MIVERR</a></p>
     </div>
   </footer>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      {% block script %}
+      {% endblock %}
+    </script>
   </body>
 </html>
