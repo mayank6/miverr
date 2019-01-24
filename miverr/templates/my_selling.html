@@ -18,7 +18,7 @@
     {% for purchase in purchases %}
     <tr>
       <th>{{ forloop.counter }}</th>
-      <th><a href="{% url 'miverrapp:gigdetail' purchase.gig.id %}">{{purchase.gig.title}}</a></th>
+      <th><a href="{% url 'miverrapp:gig_detail' purchase.gig.id %}">{{purchase.gig.title}}</a></th>
       <th><a href="{% url 'miverrapp:profile' purchase.buyer.username %}">{{purchase.gig.user.username}}</a></th>
       <th>{{purchase.gig.price}}</th>
       <th>{{purchase.time}}</th>
