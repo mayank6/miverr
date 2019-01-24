@@ -49,7 +49,31 @@
   </div>
 <div class="col-md-4 mt-2">
   <div class="card-header">
-    <a href="#" class="btn btn-lg btn-success btn-block">Order Now($6)</a>
+    {% if user and not user.is_anonymous %}
+        <form class="" action="/checkout/" method="POST">
+          {% csrf_token %}
+          <div id="payment-form">
+            <input name="gig_id" value="{{gig.id}}" hidden>
+            <button type="submit" class="btn btn-success btn-block" >ORDER NOW (${{gig.price}})</button>
+          </div>
+        </form>
+        <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+          $(document).ready(function(){
+            braintree.setup("{{client_token}}","dropin",{
+              container:"payment-form",
+              paypal:{
+                singleUse:true,
+                amount:"{{gig.price}}",
+                currency:"USD"
+              }
+            })
+          })
+        </script>
+    {% else %}
+      You need to login to order this gig!
+    {% endif %}
 </div>
     <div class="card text-center mt-4 mb-2">
         <div class="card-header">
@@ -59,7 +83,7 @@
           <img src="{% static 'img/avatar.jpg' %}" style="height:60px; width:60px;" class="center-block img-circle" alt="">
           <h5 class="card-title">{{gig.user.username}}</h5>
           <p class="card-text">{{gig.user.about}}</p>
-          <a href="#" class="btn btn-primary">Visit</a>
+          <a href="{% url 'miverrapp:profile' gig.user.username %}" class="btn btn-primary">Visit</a>
         </div>
 </div>
 

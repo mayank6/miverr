@@ -4,6 +4,11 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import GigForm
 from django.http import Http404
+import braintree
+
+braintree.Configuration.configure(braintree.Environment.Sandbox,merchant_id="jvfr2jhb59fv74s9",
+public_key="gr7skyy72nmbkp5j",private_key="6eddf2ae3bb880fa59d4ff9a8e5c96e9")
+
 
 def home(request):
     gig=Gig.objects.filter(status=True)
@@ -11,7 +16,8 @@ def home(request):
 
 def gig_detail(request,id):
     gig=get_object_or_404(Gig,id=id)
-    return render(request,'gig_detail.html',{"gig":gig})
+    client_token=braintree.ClientToken.generate()
+    return render(request,'gig_detail.html',{"gig":gig,"client_token":client_token})
 
 @login_required(login_url="/users/login/")
 def create_gig(request):
@@ -49,3 +55,19 @@ def edit_gig(request,id):
 def my_gigs(request):
     gigs=Gig.objects.filter(user=request.user)
     return render(request,'my_gigs.html',{"gigs":gigs})
+
+
+@login_required(login_url="/users/login/")
+def create_purchase(request):
+    if request.method=="POST":
+        gig=get_object_or_404(Gig,id=request.POST['gig_id'])
+        nonce=request.POST["payment_method_nonce"]
+        result=braintree.Transaction.sale({
+            "amount":gig.price,
+            "payment_method_nonce":nonce
+        })
+        if result.is_success:
+            print("Buy Gig success")
+        else:
+            print("Buy Gig Failed")
+    return redirect("/")

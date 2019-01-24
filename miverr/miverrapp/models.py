@@ -21,3 +21,10 @@ class Gig(models.Model):
 
     def __str__(self):
         return self.title
+
+class purchase(models.Model):
+    gig=models.ForeignKey(Gig,on_delete=models.CASCADE)
+    buyer=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    time=models.DateTimeField(default=timezone.now)
+    def __str__(self):
+        return self.gig.title
