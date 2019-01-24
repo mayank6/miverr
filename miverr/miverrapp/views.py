@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Gig
+from .models import Gig,purchase,review
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import GigForm
@@ -15,9 +15,18 @@ def home(request):
     return render(request,'home.html',{"objects":gig})
 
 def gig_detail(request,id):
+    if request.method=="POST" and "content" in request.POST:
+        print("working")
+        review.objects.create(content=request.POST['content'],user=request.user,gig_id=id)
+        print("working")
     gig=get_object_or_404(Gig,id=id)
+    reviews=review.objects.filter(gig=gig)
+    if request.user.is_anonymous or review.objects.filter(gig=gig,user=request.user).count()>0:
+        sr=False
+    else:
+        sr=purchase.objects.filter(gig=gig,buyer=request.user).count()>0
     client_token=braintree.ClientToken.generate()
-    return render(request,'gig_detail.html',{"gig":gig,"client_token":client_token})
+    return render(request,'gig_detail.html',{"sr":sr,"reviews":reviews,"gig":gig,"client_token":client_token})
 
 @login_required(login_url="/users/login/")
 def create_gig(request):
@@ -67,7 +76,30 @@ def create_purchase(request):
             "payment_method_nonce":nonce
         })
         if result.is_success:
-            print("Buy Gig success")
-        else:
-            print("Buy Gig Failed")
+            purchase.objects.create(gig=gig,buyer=request.user)
     return redirect("/")
+
+@login_required(login_url="/users/login/")
+def my_selling(request):
+    p=purchase.objects.filter(gig__user=request.user)
+    return render(request,'my_selling.html',{'purchases':p})
+
+@login_required(login_url="/users/login/")
+def my_buying(request):
+    p=purchase.objects.filter(buyer=request.user)
+    return render(request,'my_buying.html',{'purchases':p})
+
+def category(request,slug):
+    print(slug)
+    c={
+    "graphic-designing":"GD",
+    "digital-marketing":"DM",
+    "content-writing":"CW",
+    "game-animation":"GM",
+    "music-video":"MV",
+    }
+    try:
+        gigs=Gig.objects.filter(category=c[slug])
+        return render(request,"home.html",{"objects":gigs})
+    except:
+        return redirect('home')

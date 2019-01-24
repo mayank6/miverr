@@ -19,36 +19,50 @@
 </div>
 <ul class="list-group-item list-group-flush">
 <div class="row">
-  <div class="col-md-1">
-    <img src="{% static 'img/avatar.jpg' %}" style="height:50px; width:50px;" class="img-circle card-img center-block" alt="">
-  </div>
-  <div class="col-md-11">
-    <h5>username</h5>
-    <p>Great Job</p>
-  </div>
-  <div class="col-md-1">
-    <img src="{% static 'img/avatar.jpg' %}" style="height:50px; width:50px;" class="img-circle card-img center-block" alt="">
-  </div>
-  <div class="col-md-11">
-    <h5>username</h5>
-    <p>Will work with him in future</p>
-  </div>
-  <div class="col-md-1">
-    <img src="{% static 'img/avatar.jpg' %}" style="height:50px; width:50px;" class="img-circle card-img center-block" alt="">
-  </div>
-  <div class="col-md-11">
-    <h5>username</h5>
-    <p>This guy have some knwoledge</p>
-  </div>
 
+  {% for review in reviews %}
+  <div class="col-md-1">
+    <img src="{% static 'img/avatar.jpg' %}" style="height:50px; width:50px;" class="img-circle card-img center-block" alt="">
+  </div>
+  <div class="col-md-11">
+    <h5>{{review.user.username}}</h5>
+    <p>{{review.content}}</p>
+  </div>
+  {% endfor %}
 </div>
 
 </ul>
 </div>
+{% if sr %}
+        <div class="card card-default mt-3 mb-3">
+        <div class="card-header">
+          Review
+        </div>
+                  <form class="form-horizontal" id="productionForm1" method="POST"">
+                      {% csrf_token %}
+                            <div class="form-group">
 
+                            <div class="col-sm-10">
+                              <textarea class="form-control" name="content" placeholder="review"></textarea>
+                            </div>
+                            </div>
+                            <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                              <button type="submit" class="btn btn-default">Post</button>
+                            </div>
+                            </div>
+                      </form>
+        </div>
+{% else %}
+<div class="card card-default mt-3 mb-3">
+<div class="card-header">
+
+</div>
+</div>
+{% endif %}
   </div>
-<div class="col-md-4 mt-2">
-  <div class="card-header">
+<div class="col-md-4 mt-2 ">
+  <div class="card-header sticky-top">
     {% if user and not user.is_anonymous %}
         <form class="" action="/checkout/" method="POST">
           {% csrf_token %}

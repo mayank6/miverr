@@ -28,3 +28,10 @@ class purchase(models.Model):
     time=models.DateTimeField(default=timezone.now)
     def __str__(self):
         return self.gig.title
+
+class review(models.Model):
+    gig=models.ForeignKey(Gig,on_delete=models.CASCADE)
+    user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    content=models.CharField(max_length=500)
+    def __str__(self):
+        return self.content

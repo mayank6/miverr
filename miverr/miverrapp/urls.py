@@ -11,6 +11,7 @@ urlpatterns = [
     re_path(r'^gigs/(?P<id>[\d-]+)/$',views.gig_detail,name="gig_detail"),
     re_path(r'^gigs/(?P<id>[\d-]+)/edit/$',views.edit_gig,name="gig_edit"),
     path("<username>/",profile,name="profile"),
-
-
+    path("gigs/myselling/",views.my_selling,name="my_selling"),
+    path("gigs/mybuying/",views.my_buying,name="my_buying"),
+    re_path(r'^category/(?P<slug>[\w-]+)/$',views.category,name="category"),
 ]

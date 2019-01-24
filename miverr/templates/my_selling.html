@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<h1 style="margin-bottom:30px;">My Buyings</h1>
+<div class="card card-default">
+<table class="table table-bordered table-striped">
+  <thead class="bg-success">
+    <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Price</th>
+        <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for purchase in purchases %}
+    <tr>
+      <th>{{ forloop.counter }}</th>
+      <th><a href="{% url 'miverrapp:gigdetail' purchase.gig.id %}">{{purchase.gig.title}}</a></th>
+      <th><a href="{% url 'miverrapp:profile' purchase.buyer.username %}">{{purchase.gig.user.username}}</a></th>
+      <th>{{purchase.gig.price}}</th>
+      <th>{{purchase.time}}</th>
+    </tr>
+    {% endfor %}
+  </tbody>
+
+</table>
+</div>
+
+
+{% endblock %}
